@@ -29,8 +29,8 @@ def createcomment(request , post_pk):
             Comment.objects.create(
                 post = post,
                 author = request.user,
-                content = comment_form.cleaned_data['content']
-            )
+               content = content,
+         )
         #post url 을 가진 post_list 뷰로 이동한다.
         return redirect('post:post_list')
         
