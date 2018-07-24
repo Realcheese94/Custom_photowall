@@ -10,7 +10,7 @@ class Post(models.Model):
     photo = models.ImageField(upload_to="post")
 
     def __str__(self):
-        return 'Post (PK: {self.pk}, Author :{self.author.username})'
+        return self.pk
 
 
 class Comment(models.Model):
@@ -18,9 +18,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
 
-    def __str__(self):
-        return self.post
-        
+   
 
 
 
