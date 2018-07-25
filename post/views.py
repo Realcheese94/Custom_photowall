@@ -26,12 +26,18 @@ def createcomment(request , post_pk):
         comment_form = Commentform(request.POST)
 
         if comment_form.is_valid():
-            Comment.objects.create(
-                post = post,
-                author = request.user,
-               content = content,
-         )
+            comment = comment_form.save(commit =False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
         #post url 을 가진 post_list 뷰로 이동한다.
         return redirect('post:post_list')
-        
 
+def post_detail(request,post_pk):
+    post = get_object_or_404(Post,pk=post_pk)
+    comment_form = Commentform()
+    context={
+        'post' : post,
+        'comment' : comment_form,
+    }
+    return render(request,'post_detail.html',context)
